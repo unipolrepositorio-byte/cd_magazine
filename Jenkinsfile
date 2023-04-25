@@ -1,8 +1,5 @@
 pipeline {
-    agent {
-        label "Mainline"
-    }
-
+    agent any
     parameters {
         string(name: 'WEB_APP', description: 'WEBAPP image tag seven first characters')
         booleanParam(name: 'DEV', defaultValue: false, description: 'Deploy to DEV?')
@@ -10,7 +7,7 @@ pipeline {
     }
 
     environment {
-        PROJECT_NAME = "gamingcity"
+        PROJECT_NAME = "magazine-spa"
     }
 
     options {
@@ -26,7 +23,7 @@ pipeline {
             }
             steps {
                 sh "export WEB_APP=${WEB_APP}"
-                sh "docker-compose -f deployment/dev.yml up -d --build"
+                sh "docker-compose -f deployment/dev.yml up -d"
             }
         }
         stage("Deploy to PROD") {
@@ -37,7 +34,7 @@ pipeline {
             }
             steps {
                 sh "export WEB_APP=${WEB_APP}"
-                sh "docker-compose -f deployment/prod.yml up -d --build"
+                sh "docker-compose -f deployment/prod.yml up -d"
             }
         }
     }
