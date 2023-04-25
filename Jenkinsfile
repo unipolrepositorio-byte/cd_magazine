@@ -34,7 +34,7 @@ pipeline {
                 }
             }
             steps {
-                sh "docker-compose -f deployment/dev.yml down"
+                sh "docker-compose -f deployment/prod.yml down"
                 sh "export WEB_APP=${WEB_APP}"
                 sh "docker-compose -f deployment/prod.yml up -d"
             }
