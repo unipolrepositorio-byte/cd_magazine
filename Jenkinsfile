@@ -12,9 +12,22 @@ pipeline {
 
     options {
         disableConcurrentBuilds()
+        skipDefaultCheckout()
     }
 
     stages {
+        stage("Preparación") { 
+            steps {
+                script {
+                    if (params.DEV) {
+                        sh "docker-compose -f deployment/dev.yml down"
+                    }
+                    if (params.PROD) {
+                        sh "docker-compose -f deployment/prod.yml down"
+                    }
+                }
+            }
+        }
         stage("Deploy to DEV") {
             when {
                 allOf {
