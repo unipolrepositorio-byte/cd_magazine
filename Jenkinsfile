@@ -12,22 +12,9 @@ pipeline {
 
     options {
         disableConcurrentBuilds()
-        skipDefaultCheckout()
     }
 
     stages {
-        stage("Preparación") { 
-            steps {
-                script {
-                    if (params.DEV) {
-                        sh "docker-compose -f deployment/dev.yml down"
-                    }
-                    if (params.PROD) {
-                        sh "docker-compose -f deployment/prod.yml down"
-                    }
-                }
-            }
-        }
         stage("Deploy to DEV") {
             when {
                 allOf {
@@ -35,6 +22,7 @@ pipeline {
                 }
             }
             steps {
+                sh "docker-compose -f deployment/dev.yml down"
                 sh "export WEB_APP=${WEB_APP}"
                 sh "docker-compose -f deployment/dev.yml up -d"
             }
@@ -46,6 +34,7 @@ pipeline {
                 }
             }
             steps {
+                sh "docker-compose -f deployment/dev.yml down"
                 sh "export WEB_APP=${WEB_APP}"
                 sh "docker-compose -f deployment/prod.yml up -d"
             }
