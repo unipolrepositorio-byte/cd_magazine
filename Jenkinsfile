@@ -2,6 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'WEB_APP', description: 'WEBAPP image tag seven first characters')
+        string(name: 'STRAPI_APP', description: 'WEBAPP image tag seven first characters')
         booleanParam(name: 'DEV', defaultValue: false, description: 'Deploy to DEV?')
         booleanParam(name: 'PROD', defaultValue: false, description: 'Deploy to PROD?')
     }
@@ -24,6 +25,7 @@ pipeline {
             steps {
                 sh "docker-compose -f deployment/dev.yml down"
                 sh "export WEB_APP=${WEB_APP}"
+                sh "export STRAPI_APP=${STRAPI_APP}"
                 sh "docker-compose -f deployment/dev.yml up -d"
             }
         }
@@ -36,6 +38,7 @@ pipeline {
             steps {
                 sh "docker-compose -f deployment/prod.yml down"
                 sh "export WEB_APP=${WEB_APP}"
+                sh "export STRAPI_APP=${STRAPI_APP}"
                 sh "docker-compose -f deployment/prod.yml up -d"
             }
         }
