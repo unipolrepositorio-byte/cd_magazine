@@ -51,7 +51,7 @@ services:
 
     restart: always
   webapp:
-    image: "ditmar/magazine-spa:e2e817b"
+    image: "ditmar/magazine-spa:${WEB_APP}"
     networks:
       - service-net
     labels:
