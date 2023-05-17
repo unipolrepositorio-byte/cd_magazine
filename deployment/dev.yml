@@ -47,7 +47,7 @@ services:
       - ./package.json:/opt/package.json
       - ./yarn.lock:/opt/yarn.lock
       - ./.env:/opt/app/.env
-      - ./public/uploads:/opt/app/public/uploads
+      - /home/ubuntu/files:/app/public/uploads
 
     restart: always
   webapp:
