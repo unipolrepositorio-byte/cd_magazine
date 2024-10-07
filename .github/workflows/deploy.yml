@@ -110,6 +110,9 @@ jobs:
             export STRAPI_APP=${{ env.STRAPI_APP }}
             export WEB_APP=${{ env.WEB_APP }}
             export NODE_ENV=${{ env.NODE_ENV }}
+            export DATABASE_NAME=${{ env.DATABASE_NAME }}
+            export DATABASE_USERNAME=${{ env.DATABASE_USERNAME }}
+            export DATABASE_PASSWORD=${{ env.DATABASE_PASSWORD }}
             docker-compose -f deploy.yml down
             docker-compose -f deploy.yml up -d
 
