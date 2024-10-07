@@ -116,6 +116,21 @@ jobs:
             docker-compose -f deploy.yml down
             docker-compose -f deploy.yml up -d
 
+      - name: Verify that the site is up
+        if: github.event_name == 'workflow_dispatch'
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.AWS_SSH_HOST }}
+          username: ${{ secrets.AWS_SSH_USER }}
+          key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            echo "Waiting for site to be up..."
+            for i in {1..10}; do
+              curl -f http://beta.repositoriounipol.com && break || sleep 10;
+              echo "Retrying... ($i/10)";
+            done
+
       - name: Clean up
         if: github.event_name == 'workflow_dispatch'
         run: docker image prune -a -f
