@@ -22,8 +22,8 @@ services:
       - DATABASE_USERNAME=${DATABASE_USERNAME}
       - DATABASE_PASSWORD=${DATABASE_PASSWORD}
       - DATABASE_SSL=false
-      - PUBLIC_URL=http://revista.repositoriounipol.com:1337
-      - STRAPI_ADMIN_BACKEND_URL=http://revista.repositoriounipol.com:1337
+      - PUBLIC_URL=http://beta.repositoriounipol.com:1337
+      - STRAPI_ADMIN_BACKEND_URL=http://beta.repositoriounipol.com:1337
       - HOST=0.0.0.0
     volumes:
       - ./config:/opt/app/config
@@ -41,6 +41,12 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
+      - REACT_APP_STRAPI_SERVER_PORT=1337
+      - REACT_APP_STRAPI_SERVER=http://beta.repositoriounipol.com
+      - REACT_APP_STRAPI_SERVER_SERVICE=api
+      - REACT_APP_FACEBOOK_URI=https://www.facebook.com/sharer/sharer.php
+      - REACT_APP_WHATSAPP_URI=https://api.whatsapp.com/send
+      - REACT_APP_TELEGRAM_URI=https://t.me/share/url
     ports:
       - "80:3000"
     restart: always
