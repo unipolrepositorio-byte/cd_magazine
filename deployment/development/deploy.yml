@@ -52,7 +52,6 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx:/etc/nginx/conf.d
       - ./letsencrypt:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     restart: always
