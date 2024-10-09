@@ -113,6 +113,13 @@ jobs:
             export DATABASE_NAME=${{ env.DATABASE_NAME }}
             export DATABASE_USERNAME=${{ env.DATABASE_USERNAME }}
             export DATABASE_PASSWORD=${{ env.DATABASE_PASSWORD }}
+            export REACT_APP_STRAPI_SERVER_PORT=1337
+            export REACT_APP_STRAPI_SERVER=https://revista.repositoriounipol.com/content
+            export REACT_APP_STRAPI_SERVER_SERVICE=api
+            export REACT_APP_FACEBOOK_URI=https://www.facebook.com/sharer/sharer.php
+            export REACT_APP_WHATSAPP_URI=https://api.whatsapp.com/send
+            export REACT_APP_TELEGRAM_URI=https://t.me/share/url
+
             docker-compose -f deploy.yml down
             docker-compose -f deploy.yml up -d
 
