@@ -55,14 +55,6 @@ services:
       - ./letsencrypt:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     restart: always
-  certbot:
-    image: certbot/certbot
-    depends_on:
-      - webapp
-    volumes:
-      - ./letsencrypt:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --webroot --webroot-path=/var/www/certbot --email your-ditmarcastro@gmail.com --agree-tos --no-eff-email -d beta.repositoriounipol.com
   postgres:
     image: postgres:13
     networks:
@@ -75,7 +67,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /home/ubuntu/postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
