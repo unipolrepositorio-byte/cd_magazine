@@ -67,7 +67,6 @@ services:
     image: postgres:13
     networks:
       - service-net
-    container_name: my_postgres
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
